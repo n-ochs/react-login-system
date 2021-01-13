@@ -17,7 +17,7 @@ class App extends React.Component {
     return (
       <div className="App">
         { /* Auth Form */ }
-        <LoginForm />
+        <LoginForm handleSubmit={this._checkCredentials}/>
       </div>
     );
   };

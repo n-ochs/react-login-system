@@ -6,7 +6,8 @@ class LoginForm extends React.Component {
         //initial state goes here
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            response: ''
         };
     };
 
@@ -32,8 +33,15 @@ class LoginForm extends React.Component {
         );
     };
 
-    _submitForm = () => {
-
+    _submitForm = (event) => {
+        event.preventDefault();
+        const response = this.props.handleSubmit(this.state.username, this.state.password);
+        this.setState({
+            response
+        }, () => {
+            console.log(response);
+            console.log(this.state);
+        });
     };
 
     _updateField = (field, value) => {
