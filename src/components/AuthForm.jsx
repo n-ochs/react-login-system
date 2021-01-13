@@ -7,7 +7,10 @@ class LoginForm extends React.Component {
         this.state = {
             username: '',
             password: '',
-            response: ''
+            response: {
+                message: null,
+                valid: false
+            }
         };
     };
 
@@ -28,6 +31,7 @@ class LoginForm extends React.Component {
                         }} />
                     </label>
                     <input type="submit" />
+                    <Message {...this.state.response} />
                 </form>
             </div>
         );
@@ -46,7 +50,11 @@ class LoginForm extends React.Component {
 
     _updateField = (field, value) => {
         this.setState({
-            [field]: value //'username' and 'password' gets passed down here as field
+            [field]: value, //'username' and 'password' gets passed down here as field
+            response: {
+                message: '',
+                valid: false
+            }
         }, () => {
             console.log(`${field} is now ${value}`)
         })
@@ -55,3 +63,23 @@ class LoginForm extends React.Component {
 };
 
 export default LoginForm
+
+class Message extends React.Component {
+    render() {
+        const { message, valid } = this.props;
+        //the same as
+        // const message = this.props.message;
+        // const valid = this.props.valid;
+
+        if (message) {
+            return (
+                //show the message to the end user
+                <h3 className={valid ? 'success' : 'error'}>{message}</h3>
+            );
+        } else {
+            return null
+        };
+    };
+};
+
+// export default Message;
